@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servcare.iml" filepath="$PROJECT_DIR$/.idea/modules/servcare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/servcare.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/servcare.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1230822037/servcare.lottie-react-native.iml" filepath="$PROJECT_DIR$/.idea/modules/1230822037/servcare.lottie-react-native.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-498372470/servcare.react-native-async-storage_async-storage.iml" filepath="$PROJECT_DIR$/.idea/modules/-498372470/servcare.react-native-async-storage_async-storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1620459234/servcare.react-native-clipboard_clipboard.iml" filepath="$PROJECT_DIR$/.idea/modules/1620459234/servcare.react-native-clipboard_clipboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/170843941/servcare.react-native-community_geolocation.iml" filepath="$PROJECT_DIR$/.idea/modules/170843941/servcare.react-native-community_geolocation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/460627992/servcare.react-native-date-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/460627992/servcare.react-native-date-picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/4131211/servcare.react-native-document-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/4131211/servcare.react-native-document-picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-603869227/servcare.react-native-image-picker.iml" filepath="$PROJECT_DIR$/.idea/modules/-603869227/servcare.react-native-image-picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-273774065/servcare.react-native-permissions.iml" filepath="$PROJECT_DIR$/.idea/modules/-273774065/servcare.react-native-permissions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1046187258/servcare.react-native-safe-area-context.iml" filepath="$PROJECT_DIR$/.idea/modules/1046187258/servcare.react-native-safe-area-context.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1517944210/servcare.react-native-screens.iml" filepath="$PROJECT_DIR$/.idea/modules/1517944210/servcare.react-native-screens.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/26360415/servcare.react-native-spinkit.iml" filepath="$PROJECT_DIR$/.idea/modules/26360415/servcare.react-native-spinkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1021398181/servcare.react-native-vector-icons.iml" filepath="$PROJECT_DIR$/.idea/modules/1021398181/servcare.react-native-vector-icons.iml" />
+    </modules>
+  </component>
+</project>
