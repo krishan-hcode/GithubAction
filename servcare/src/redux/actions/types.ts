@@ -1,0 +1,11 @@
+export const ROOT = 'ROOT';
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const FETCH_PRODUCT = 'FETCH_PRODUCT';
+export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const ADD_USER_INFO = 'ADD_USER_INFO';
+export const ADD_ADDRESS = 'ADD_ADDRESS';
+export const FETCH_ADDRESS = 'FETCH_ADDRESS';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
+export const LOADING = 'LOADING';
