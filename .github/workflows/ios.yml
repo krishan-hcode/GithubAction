@@ -24,34 +24,18 @@ jobs:
       - name: Install React-Native-Cli
         run: npm i -g react-native-cli --force
         
-      - run: xcode-select -p
-      - name: Cache pods
-        uses: actions/cache@v1
-        with:
-          path: ios/Pods
-          key: ${{ runner.OS }}-pods-cache-${{ hashFiles('**/ios/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-pods-cache-
-      - run: pod install
-        working-directory: ios
-        name: Install pod dependencies
+      - name: Install pod dependencies
+        run: |
+          cd ios && pod install
         
-      - name: Build iOS (debug)
-        run: "xcodebuild \
-          -workspace ios/servcare.xcworkspace \
-          -scheme servcare \
-          clean archive \
-          -sdk iphoneos \
-          -configuration Debug \
-          -UseModernBuildSystem=NO \
-          -archivePath $PWD/servcare \
-          CODE_SIGNING_ALLOWED=NO"
-
-     - name: Compress .xcarchive
-       run: zip -r -9 servcare.xcarchive.zip $PWD/servcare.xcarchive/
-
-     - uses: actions/upload-artifact@v2
-       with:
-         name: ios-xarchive
-         path: servcare.xcarchive.zip
+      - name: Build app
+        run: |       
+          xcodebuild -workspace servcare.xcworkspace -scheme servcare archive -archivePath servcare.xcarchive -allowProvisioningUpdates
+          xcodebuild -exportArchive -archivePath ./servcare.xcarchive -exportPath . -exportOptionsPlist servcare/Info.plist
+          mv servcare.ipa ../servcare.ipa
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: servcare.ipa
+          path: ios/build/
         
