@@ -24,6 +24,8 @@ jobs:
       - name: Install React-Native-Cli
         run: npm i -g react-native-cli --force
         
+      - run: xcode-select -p
+        
       - name: Install pod dependencies
         run: |
           cd ios && pod install
