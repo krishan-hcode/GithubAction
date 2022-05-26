@@ -32,9 +32,15 @@ jobs:
         
       - name: Build app
         run: |       
-          xcodebuild -workspace servcare.xcworkspace -scheme servcare archive -archivePath servcare.xcarchive -allowProvisioningUpdates
-          xcodebuild -exportArchive -archivePath ./servcare.xcarchive -exportPath . -exportOptionsPlist servcare/Info.plist
-          mv servcare.ipa ../servcare.ipa
+            "xcodebuild \
+            -workspace ios/servcare.xcworkspace \
+            -scheme servcare \
+            clean archive \
+            -sdk iphoneos \
+            -configuration Debug \
+            -UseModernBuildSystem=NO \
+            -archivePath $PWD/servcare \
+            CODE_SIGNING_ALLOWED=NO"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
