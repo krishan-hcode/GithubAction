@@ -1,0 +1,57 @@
+name: iOS Debug Build
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    strategy:
+      matrix:
+        node-version: [18.x]
+        
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+         node-version: ${{ matrix.node-version }}
+         cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --force
+        
+      - name: Install React-Native-Cli
+        run: npm i -g react-native-cli --force
+        
+      - run: xcode-select -p
+      - name: Cache pods
+        uses: actions/cache@v1
+        with:
+          path: ios/Pods
+          key: ${{ runner.OS }}-pods-cache-${{ hashFiles('**/ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.OS }}-pods-cache-
+      - run: pod install
+        working-directory: ios
+        name: Install pod dependencies
+        
+      - name: Build iOS (debug)
+        run: "xcodebuild \
+          -workspace ios/servcare.xcworkspace \
+          -scheme servcare \
+          clean archive \
+          -sdk iphoneos \
+          -configuration Debug \
+          -UseModernBuildSystem=NO \
+          -archivePath $PWD/servcare \
+          CODE_SIGNING_ALLOWED=NO"
+
+     - name: Compress .xcarchive
+       run: zip -r -9 servcare.xcarchive.zip $PWD/servcare.xcarchive/
+
+     - uses: actions/upload-artifact@v2
+       with:
+         name: ios-xarchive
+         path: servcare.xcarchive.zip
+        
