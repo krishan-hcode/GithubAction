@@ -17,7 +17,7 @@ jobs:
         run: npm -g install react-native
         
       - name: Install react-native-cli
-        run: npm i -g react-native-cli
+        run: npm i -g react-native-cli --force
         
       - name: Build Android Debug
         run: rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
