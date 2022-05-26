@@ -9,15 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js v18
+        uses: actions/setup-node@v1
+        with: node-version: 18.0.0
 
       - name: Install dependencies
         run: npm install --force
-
+        
       - name: Build Android Debug
+        run: rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
+
+      - name: Build Android Apk
         run: cd android && ./gradlew assembleDebug
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: release
+          name: android-debug.apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
