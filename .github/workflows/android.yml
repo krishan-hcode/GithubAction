@@ -10,7 +10,7 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x, 18.x]
+        node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -25,10 +25,7 @@ jobs:
       - name: Install dependencies
         run: npm install --force
         
-      - name: Install react-native
-        run: npm -g install react-native
-        
-      - name: Install react-native-cli
+      - name: Install React-Native-Cli
         run: npm i -g react-native-cli --force
         
       - name: Build Android Debug
