@@ -53,13 +53,19 @@ jobs:
         with:
           name: android-debug.apk
           path: servcare/android/app/build/outputs/apk/debug/app-debug.apk
+          
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: build
+          path: build
         
       - name: Run a one-line script
         run: echo servcare/android/app/build/outputs/apk/debug/ 
         
       - name: Push build to S3
         run: |
-         aws s3 sync servcare/android/app/build/outputs/apk/debug/ s3://${{ secrets.AWS_S3_BUCKET}}/mobile-app-apks// 
+         aws s3 sync ./build s3://${{ secrets.AWS_S3_BUCKET}}/mobile-app-apks// 
 
      
 
