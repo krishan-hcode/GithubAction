@@ -21,19 +21,19 @@ jobs:
          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --force
+        run: cd servcare && npm install --force
         
       - name: Install React-Native-Cli
-        run: npm i -g react-native-cli --force
+        run: cd servcare && npm i -g react-native-cli --force
         
       - name: Build Android Debug
-        run: rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
+        run: cd servcare && rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
 
       - name: Build Android Apk
-        run: cd android && ./gradlew assembleDebug
+        run: cd servcare && cd android && ./gradlew assembleDebug
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: android-debug.apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: servcare/android/app/build/outputs/apk/debug/app-debug.apk
