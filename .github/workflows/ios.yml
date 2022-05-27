@@ -29,7 +29,7 @@ jobs:
       - name: Install React-Native-Cli
         run: npm i -g react-native-cli --force
         
-      - run: xcode-select
+      - run: xcode-select -p
       
       - name: Xcode version
         run: /usr/bin/xcodebuild -version
@@ -37,6 +37,9 @@ jobs:
       - name: Install pod dependencies
         run: |
           cd ios && pod install
+          
+      - name: Build
+        run: xcodebuild -workspace servcare.xcworkspace -configuration Debug -scheme servcare -destination id=1F486764-F318-4FC7-BCC8-70B59676A8FA
         
       - name: Build archive
         run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj \
