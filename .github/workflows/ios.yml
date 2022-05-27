@@ -40,7 +40,7 @@ jobs:
         
       - name: Build archive
         run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj \
-         -configuration debug  -schema CocoHeadsNL \ 
+         -configuration Debug  -schema CocoHeadsNL \ 
          -derivedDataPath DerivedData \ 
          -archivePath DerivedData/Archive/CocoHeadsHL archive 
          
