@@ -35,11 +35,22 @@ jobs:
       - name: Run a one-line script
         run: echo ${{ secrets.AWS_S3_BUCKET}}/mobile-app-apks/ 
         
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+          aws-region: ${{ secrets.AWS_REGION }} 
+        
       - name: Build Android Debug
         run: rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
 
       - name: Build Android Apk
         run:  cd android && ./gradlew assembleDebug
+        
+      - name: Push build to S3
+        run: |
+         aws s3 sync servcare/android/app/build/outputs/apk/debug/app-debug.apk s3://${{ secrets.AWS_S3_BUCKET}}/mobile-app-apks/ 
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
@@ -47,15 +58,5 @@ jobs:
           name: android-debug.apk
           path: servcare/android/app/build/outputs/apk/debug/app-debug.apk
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
-          aws-region: ${{ secrets.AWS_REGION }} 
-          
-      - name: Push build to S3
-        run: |
-         aws s3 sync ./home/runner/work/GithubAction/GithubAction/servcare/android/app/build/outputs/apk/debug/ s3://${{ secrets.AWS_S3_BUCKET}}/mobile-app-apks/ 
-          
+    
           
