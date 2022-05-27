@@ -30,13 +30,25 @@ jobs:
         run: npm i -g react-native-cli --force
         
       - run: xcode-select -p
+      
+      - name: Xcode version
+        run: /usr/bin/xcodebuild -version
         
       - name: Install pod dependencies
         run: |
           cd ios && pod install
         
-      - name: Build App
-        run: xcodebuild -project servcare.xcodeproj -scheme servcare -destination "generic/platform=iOS" -configuration debug build CODE_SIGNING_ALLOWED=NO
+      - name: Build archive
+        run: xcodebuild -sdk iphoneos -project CocoaHeadsNL/CocoaHeadsNL.xcodeproj \
+         -configuration debug  -schema CocoHeadsNL \ 
+         -derivedDataPath DerivedData \ 
+         -archivePath DerivedData/Archive/CocoHeadsHL archive 
+         
+      - name: Export Archive
+        run: xcodebuild -exportArchive \ 
+         -archivePath DerivedData/Archive/CocoHeadsHL.xcarchive \ 
+         -exportOptionsPlist provisioning/app-Store.plist \
+         -exportPath DerivedData/ipa 
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
