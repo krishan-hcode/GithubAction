@@ -35,8 +35,6 @@ jobs:
         run: |
           cd ios && pod install
         
-      - name: Run tests
-        run: xcodebuild clean test -project servcare.xcodeproj -scheme servcare -destination "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest"
       - name: Build App
         run: xcodebuild -project servcare.xcodeproj -scheme servcare -destination "generic/platform=iOS" -configuration debug build CODE_SIGNING_ALLOWED=NO
 
