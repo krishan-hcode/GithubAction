@@ -9,6 +9,9 @@ jobs:
         node-version: [18.x]
         
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: servcare
     steps:
       - uses: actions/checkout@v2
       
@@ -17,6 +20,8 @@ jobs:
         with:
          node-version: ${{ matrix.node-version }}
          cache: 'npm'
+         cache-dependency-path: '**/package-lock.json'
+
 
       - name: Install dependencies
         run: npm install --force
@@ -33,7 +38,7 @@ jobs:
       - name: Run tests
         run: xcodebuild clean test -project servcare.xcodeproj -scheme servcare -destination "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest"
       - name: Build App
-        run: xcodebuild -project servcare.xcodeproj -scheme servcare -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild -project servcare.xcodeproj -scheme servcare -destination "generic/platform=iOS" -configuration debug build CODE_SIGNING_ALLOWED=NO
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
