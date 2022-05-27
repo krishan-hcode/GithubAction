@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [16.x]
         
     runs-on: ubuntu-latest
     defaults:
@@ -25,10 +25,10 @@ jobs:
          cache-dependency-path: '**/package-lock.json'
 
       - name: Install dependencies
-        run:  npm install --force
+        run:  npm install
         
       - name: Install React-Native-Cli
-        run: npm i -g react-native-cli --force
+        run: npm i -g react-native-cli
         
       - name: Build Android Debug
         run: rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
