@@ -4,6 +4,8 @@ name: Build Android
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+  
 jobs:
   build:
     strategy:
@@ -25,7 +27,7 @@ jobs:
          cache-dependency-path: '**/package-lock.json'
 
       - name: Install dependencies
-        run:  npm install
+        run:  npm ci
         
       - name: Install React-Native-Cli
         run: npm i -g react-native-cli
