@@ -28,13 +28,13 @@ jobs:
         run: cd servcare && npm install --force
         
       - name: Install React-Native-Cli
-        run: cd servcare && npm i -g react-native-cli --force
+        run: npm i -g react-native-cli --force
         
       - name: Build Android Debug
-        run: cd servcare && rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
+        run: rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
 
       - name: Build Android Apk
-        run: cd servcare && cd android && ./gradlew assembleDebug
+        run:  cd android && ./gradlew assembleDebug
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
