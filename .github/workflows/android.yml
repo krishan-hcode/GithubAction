@@ -65,7 +65,7 @@ jobs:
         
       - name: Push build to S3
         run: |
-         aws s3 sync /home/runner/work/GithubAction/GithubAction/build s3://servcare-dev-data/mobile-app-apks/ 
+         aws s3 sync /android/app/build/outputs/apk/debug s3://servcare-dev-data/mobile-app-apks/ 
 
      
 
