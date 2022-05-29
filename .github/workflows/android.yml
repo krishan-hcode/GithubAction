@@ -30,17 +30,7 @@ jobs:
         run:  npm ci
         
       - name: Install React-Native-Cli
-        run: npm i -g react-native-cli
-        
-      - name: Run a one-line script
-        run: echo ${{ secrets.AWS_S3_BUCKET}}/mobile-app-apks/ 
-        
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
-          aws-region: ${{ secrets.AWS_REGION }} 
+        run: npm i -g react-native-cli 
         
       - name: Build Android Debug
         run: rm -rf android/app/build && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ 
@@ -48,20 +38,12 @@ jobs:
       - name: Build Android Apk
         run:  cd android && ./gradlew assembleDebug
         
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          name: android-debug.apk
-          path: servcare/android/app/build/outputs/apk/debug/app-debug.apk
-          
-      - name: Download Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: android-debug.apk
-          path: build
-        
-      - name: Run a one-line script
-        run: echo servcare/android/app/build/outputs/apk/debug 
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+          aws-region: ${{ secrets.AWS_REGION }} 
         
       - name: Push build to S3
         run: |
