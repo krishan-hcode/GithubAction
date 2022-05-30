@@ -47,7 +47,8 @@ jobs:
         
       - name: Push build to S3
         run: |
-         aws s3 cp android/app/build/outputs/apk/debug/ s3://${{ secrets.AWS_S3_BUCKET }}/mobile-app-apks/ --recursive
+          mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/app-debug_$(date).apk |  
+          aws s3 cp android/app/build/outputs/apk/debug/ s3://${{ secrets.AWS_S3_BUCKET }}/mobile-app-apks/ --recursive
 
      
 
