@@ -45,8 +45,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
           aws-region: ${{ secrets.AWS_REGION }} 
           
-      - name: Rename apk file 
-        run: mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/app-debug-$(date +'%Y-%m-%d-%H-%M').apk
+      - name: Rename android apk file 
+        run: mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/app-debug-$(date).apk
+        
+      - name: Delete output-metadata.json file 
+        run: rm -f android/app/build/outputs/apk/debug/output-metadata.json
                   
       - name: Push build to S3
         run: |
