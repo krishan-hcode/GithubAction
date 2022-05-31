@@ -46,7 +46,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }} 
           
       - name: Rename android apk file 
-        run: mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/app-debug-$(date).apk
+        run: mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/app-debug-${date}.apk
         
       - name: Delete output-metadata.json file 
         run: rm -f android/app/build/outputs/apk/debug/output-metadata.json
