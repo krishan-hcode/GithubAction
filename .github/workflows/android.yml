@@ -46,7 +46,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }} 
           
       - name: Rename apk file 
-        run: mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/app-debug-$(date +'%Y-%m-%d-%H-%M').apk
+        run: mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/app-debug-$(date +" %Y-%m-%d-%H-%M").apk
                   
       - name: Push build to S3
         run: |
