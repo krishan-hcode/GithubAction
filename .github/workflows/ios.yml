@@ -39,8 +39,8 @@ jobs:
           cd ios && pod install
         
       - name: Build archive
-        run: |       
-          xcodebuild -workspace servcare.xcworkspace -scheme servcare archive -archivePath servcare.xcarchive -allowProvisioningUpdates
+        run: |
+          cd ios && xcodebuild -workspace servcare.xcworkspace -scheme servcare archive -archivePath servcare.xcarchive -allowProvisioningUpdates
           xcodebuild -exportArchive -archivePath ./servcare.xcarchive -exportPath . -exportOptionsPlist servcare/Info.plist
           mv servcare.ipa ../servcare.ipa
          
