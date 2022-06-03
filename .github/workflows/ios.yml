@@ -8,7 +8,7 @@ jobs:
       matrix:
         node-version: [18.x]
         
-    runs-on: macos-latest
+    runs-on: [self-hosted, macos]
     defaults:
       run:
         working-directory: servcare
