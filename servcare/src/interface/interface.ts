@@ -32,3 +32,33 @@ export interface NavigationProps {
   goBack(): void;
   navigate: (value: string) => void;
 }
+
+export interface Address {
+  addressId: number
+  addressType?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  landmark?: string;
+  area?: string;
+  city?: string;
+  state?: string;
+  pincode: number| undefined;
+}
+
+export interface userProfileInfo {
+  firstName:  string;
+  lastName?: string;
+  email?: string;
+  primaryMobileNumber?: number;
+  alternateMobileNumber?: number;
+  referralCode?: string;
+}
+
+export interface appUserState {
+  userInfo: userProfileInfo,
+  address: Array<Address>,
+  isLogin: boolean,
+  loading: boolean
+  addressId: number
+  userId: String
+}

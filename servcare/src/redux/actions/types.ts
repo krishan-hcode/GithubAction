@@ -9,3 +9,7 @@ export const FETCH_ADDRESS = 'FETCH_ADDRESS';
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const LOADING = 'LOADING';
+export const DELETE_ADDRESS = 'DELETE_ADDRESS';
+export const UPDATE_ADDRESS = 'UPDATE_ADDRESS';
+export const INCREMENT_ADDRESS_ID = 'INCREMENT_ADDRESS_ID';
+

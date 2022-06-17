@@ -50,6 +50,14 @@ export const customerProfileStyles = StyleSheet.create({
     flexDirection: 'column'
   },
 
+  customerIdCard: {
+    height: '25%'
+  },
+
+  customerNameCard: {
+    height: '75%'
+  },
+
   customerInfoCard: {
     backgroundColor: Colors.WHITE,
     borderRadius: 10,

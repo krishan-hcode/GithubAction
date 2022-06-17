@@ -17,7 +17,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { useDispatch, useSelector } from 'react-redux';
-import { AREA, GOOGLE_API_KEY } from '../../constants/app.constants';
+import config from '../../api/config';
+import { AREA } from '../../constants/app.constants';
+import { Address } from '../../interface/interface';
 import { addAddress } from '../../redux/actions/appAction';
 import { appStyle } from '../../styles/app.style';
 import { MyProductStyle } from '../../styles/MyProduct.style';
@@ -78,7 +80,9 @@ const AddAddress: React.FC<any> = ({
   );
 
   const handleSaveAddressBtn = () => {
-    const payload = {
+    const addressId = loginUserInfo?.addressId;
+    const payload: Address = {
+      addressId: addressId + 1,
       addressLine1: address1,
       addressLine2: address2,
       addressType: addressType,
@@ -99,7 +103,7 @@ const AddAddress: React.FC<any> = ({
       ',' +
       long +
       '&key=' +
-      GOOGLE_API_KEY,
+      config.GOOGLE_API_KEY,
     );
     const data = await resp.json();
     for (let i = 0; i < data.results[0].address_components.length; i++) {

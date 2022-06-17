@@ -1,6 +1,7 @@
 package com.servcare;
 
 import com.facebook.react.ReactActivity;
+import com.razorpay.rn.RazorpayPackage;
 
 public class MainActivity extends ReactActivity {
 

@@ -25,7 +25,7 @@ const LandingScreen: React.FC<any> =  () => {
               customerLandingScreenStyles.customerInitialsText
             ]}
           >
-            {getInitial(loginUserInfo?.userInfo?.name)}
+            {getInitial(loginUserInfo?.userInfo?.firstName)}
           </Text>
         </View>
         <Text
@@ -34,7 +34,7 @@ const LandingScreen: React.FC<any> =  () => {
             customerLandingScreenStyles.customerName
           ]}
         >
-          {loginUserInfo?.userInfo?.name}
+          {loginUserInfo?.userInfo?.firstName}
         </Text>
         <Text
           style={[
@@ -56,7 +56,7 @@ const LandingScreen: React.FC<any> =  () => {
             <MenuItem
               label={'My Address'}
               iconName={'map-marker-alt'}
-              navigateTo={'Home'}            />
+              navigateTo={'view-address'}            />
           </View>
           <View style={[customerLandingScreenStyles.menuRow]}>
             <MenuItem
@@ -79,7 +79,7 @@ const LandingScreen: React.FC<any> =  () => {
             <MenuItem
               label={'Help & Support'}
               iconName={'question-circle'}
-              navigateTo={'Home'}
+              navigateTo={'help-support'}
             />
           </View>
           <View style={[customerLandingScreenStyles.menuRow]}>

@@ -13,7 +13,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import BottomTabNavigator from './src/containers/bottomTab/BottomTabNavigator';
+import HelpSupportScreen from './src/containers/CustomerProfile/helpSupportScreen';
+import AddEditAddress from './src/containers/CustomerProfile/AddEditAddress';
 import LandingScreen from './src/containers/CustomerProfile/landingScreen';
+import ViewAddress from './src/containers/CustomerProfile/viewAddress';
 import ViewProfile from './src/containers/CustomerProfile/viewProfile';
 import {
   LoginScreen, OtpScreen, SplashScreen, UpdateProfileScreen
@@ -49,6 +52,12 @@ const App = () => {
         <Stack.Screen name="failed-transaction" component={TransactionFailure} />
         <Stack.Screen name="profile-menu" component={LandingScreen} />
         <Stack.Screen name="view-customer-profile" component={ViewProfile} />
+        <Stack.Screen name="view-address" component={ViewAddress} />
+        <Stack.Screen name="help-support" component={HelpSupportScreen} />
+        <Stack.Screen name="add-edit-address" component={AddEditAddress} initialParams={{
+          headerLabel: '',
+          address: null
+        }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

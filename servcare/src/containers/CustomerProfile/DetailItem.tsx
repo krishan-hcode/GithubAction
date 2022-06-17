@@ -34,7 +34,7 @@ const DetailItem: React.FC<DetailItemProps> = (props) => {
         </Text>
         <Text
           style={[
-            appStyle.montserrat_semibold,
+            appStyle.montserrat_medium,
             customerProfileStyles.detailsValue
           ]}
         >

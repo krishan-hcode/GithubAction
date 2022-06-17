@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { apiRoutes } from '../../api/apiRoutes';
+import config from '../../api/config';
 import { deleteIcon, pdf } from '../../assets/icons';
 import { appStyle } from '../../styles/app.style';
 import { ProductDetailStyle } from '../../styles/ProductDetail.style';
-import { bytesToSize } from '../../utilites/Utils';
+import { bytesToSize, replaceString } from '../../utilites/Utils';
 
 const ProductAttachmentComponent: React.FC<any> = ({
   handleOnClickItem,
@@ -16,6 +18,7 @@ const ProductAttachmentComponent: React.FC<any> = ({
   const onButtonPress = (data: any) => {
     handleOnClickItem(data);
   };
+  const [valid, setValid] = useState(true)
 
   return (
     <View>
@@ -24,11 +27,10 @@ const ProductAttachmentComponent: React.FC<any> = ({
         onPress={() => onButtonPress(data)}>
         <View style={[appStyle.flex, appStyle.alignItemsCenter]}>
           <View style={appStyle.w_10}>
-            {data.uri && data.type !== 'application/pdf' ? (
+            {data.type !== 'application/pdf' && data.key ? (
               <Image
-                source={{
-                  uri: data.uri,
-                }}
+                onError={() => setValid(false)}
+                source={valid ? data.key ? { uri: config.BASE_URL_MASTER + apiRoutes.MASTER + apiRoutes.S3_FILES + apiRoutes.DOWNLOAD + replaceString(data.key) } : pdf : pdf}
                 style={[ProductDetailStyle.attachmentIcon]}
               />
             ) : (
@@ -40,7 +42,7 @@ const ProductAttachmentComponent: React.FC<any> = ({
               {data.fileName ? data.fileName : data.name}
             </Text>
             <Text style={[ProductDetailStyle.attachmentSize]}>
-              {bytesToSize(data.fileSize ? data.fileSize : data.size)} &nbsp;
+              {/* {bytesToSize(data.fileSize ? data.fileSize : data.size)} &nbsp; */}
               <Text>{moment(new Date()).format('MMM DD, YYYY hh:mm A')}</Text>
             </Text>
           </View>
