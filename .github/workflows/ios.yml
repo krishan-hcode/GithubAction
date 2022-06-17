@@ -38,14 +38,14 @@ jobs:
         run: |
           cd ios && pod install
         
-      - name: Build archive
-        run: |
-          cd ios && xcodebuild build -workspace servcare.xcworkspace -scheme Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
- 
-
+      - name: Build app
+        run: |       
+          xcodebuild -workspace servcare.xcworkspace -scheme servcare archive -archivePath servcare.xcarchive -allowProvisioningUpdates
+          xcodebuild -exportArchive -archivePath ./servcare.xcarchive -exportPath . -exportOptionsPlist servcare/Info.plist
+          mv myapp.ipa ../myapp.ipa
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: servcare.ipa
+          name: myapp.ipa
           path: ios/build/
         
