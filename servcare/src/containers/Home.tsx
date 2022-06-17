@@ -5,17 +5,20 @@ import Dots from 'react-native-dots-pagination';
 import FontAwesome5 from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ScrollView } from 'react-native-virtualized-view';
 import { useSelector } from 'react-redux';
+import { apiGetHook } from '../api/apiGetHook';
+import { apiRoutes } from '../api/apiRoutes';
+import config from '../api/config';
 import HomeAppliances from '../components/HomeAppliances';
 import HomeServices from '../components/HomeServices';
 import SearchComponent from '../components/SearchComponent';
-import { HOME_APPLIANCES, SERVICES } from '../constants/app.constants';
+import { HOME_APPLIANCES } from '../constants/app.constants';
 import { appStyle } from '../styles/app.style';
 import { homeStyles } from '../styles/homeScreen.style';
 import Colors from '../utilites/Colors';
 
 const Home: React.FC<any> = () => {
-  const loginUserInfo = useSelector<any>(state => state.app)
-
+  const loginUserInfo: any = useSelector<any>(state => state.app)
+  const [serviceList, serviceListLoading] = apiGetHook(config.BASE_URL_MASTER + apiRoutes.MASTER + apiRoutes.SERVICE);
   const handleOnChange = (text: string) => {
     console.log('OnChange', text);
   };
@@ -27,7 +30,7 @@ const Home: React.FC<any> = () => {
             <View style={appStyle.w_50}>
               <Text style={homeStyles.headerHelloText}>
                 Hello
-                <Text style={homeStyles.headerNameText}> {loginUserInfo?.userInfo?.name} ,</Text>
+                <Text style={homeStyles.headerNameText}> {loginUserInfo?.userInfo?.firstName} ,</Text>
               </Text>
             </View>
             <View style={[appStyle.w_50, appStyle.alignItemsEnd]}>
@@ -64,8 +67,9 @@ const Home: React.FC<any> = () => {
           <FlatList
             showsVerticalScrollIndicator={true}
             numColumns={3}
-            data={SERVICES}
-            renderItem={({ item }) => <HomeServices data={item} />}
+            // data={SERVICES}
+            data={serviceList}
+            renderItem={({ item, index }) => <HomeServices data={item} index={index} />}
             keyExtractor={item => item.id}
           />
         </View>

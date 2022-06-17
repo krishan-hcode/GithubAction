@@ -34,7 +34,7 @@ const MenuItem: React.FC<ManuItemProps> = (props) => {
             solid
             style={{padding: 5}}
         />
-        <Text style={[appStyle.montserrat_semibold]}>{label}</Text>
+        <Text style={[appStyle.montserrat_medium]}>{label}</Text>
         </TouchableOpacity>
     </View>
   );

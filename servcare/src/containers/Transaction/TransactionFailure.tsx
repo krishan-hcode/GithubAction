@@ -1,11 +1,9 @@
 import React from "react";
 import { SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native";
 import { Text } from "react-native-elements";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { appStyle } from "../../styles/app.style";
 import { TransactionSuccessStyle } from "../../styles/transaction.style";
 import ContactInfo from "./contactInfo";
-import OrderDetails from "./orderDetails";
 import TransactionDetails from "./TransactionDetails";
 import LottieView from 'lottie-react-native';
 import { NavigationProps } from '../../interface/interface';
@@ -71,14 +69,14 @@ const TransactionFailure: React.FC<any> = () => {
         </View>
       </ScrollView>
       <View style={[appStyle.mt_20, appStyle.mb_10, appStyle.ph_6Percent]}>
-      <TouchableOpacity
-        onPress={payNowHandler}
-        style={TransactionSuccessStyle.payNowButton}>
-        <Text
-          style={[TransactionSuccessStyle.appButtonText]}>
-          Pay Now
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={payNowHandler}
+          style={TransactionSuccessStyle.payNowButton}>
+          <Text
+            style={[TransactionSuccessStyle.appButtonText]}>
+            Pay Now
+          </Text>
+        </TouchableOpacity>
     </View>
   </View>
   )

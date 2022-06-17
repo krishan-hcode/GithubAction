@@ -5,16 +5,20 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { useSelector } from 'react-redux';
+import { getApiRequest } from '../../api/apiHelpers';
+import { apiRoutes } from '../../api/apiRoutes';
+import config from '../../api/config';
 import { washingMachine } from '../../assets/icons';
 import BottomAddressModel from '../../components/Alert/BottomAddressModel';
 import BottomSlotModel from '../../components/Alert/BottomSlotModel';
 import Indicator from '../../components/Indicator';
-import { INDICATOR_LABELS, INSTRUCTION, ISSUE } from '../../constants/app.constants';
+import { INDICATOR_LABELS, INSTRUCTION } from '../../constants/app.constants';
 import { appStyle } from '../../styles/app.style';
 import { MyProductStyle } from '../../styles/MyProduct.style';
 import { ProductDetailStyle } from '../../styles/ProductDetail.style';
 import { RaiseRequestStyle } from '../../styles/RaiseRequest.style';
 import Colors from '../../utilites/Colors';
+import { getAddressFormat, toastMessage } from '../../utilites/Utils';
 import IssueModel from '../Product/IssueModel';
 import AddAddress from './AddAddress';
 
@@ -23,7 +27,7 @@ type Navigation = {
 };
 
 const RaiseRequestSummaryDetail: React.FC<any> = () => {
-  const loginUserInfo = useSelector<any>(state => state.app)
+  const loginUserInfo: any = useSelector<any>(state => state.app)
   const route = useRoute<any>();
   const [productItem, setProductItem] = useState<any>('');
   const [isChooseIssue, setChooseIssue] = useState(false);
@@ -31,6 +35,8 @@ const RaiseRequestSummaryDetail: React.FC<any> = () => {
   const [isAddressOption, setAddressOption] = useState(false);
   const [isDateSlot, setDateSlot] = useState(false);
   const [issueList, setIssueList] = React.useState<any>([]);
+  const [newIssueList, setNewIssueList] = React.useState<any>([]);
+
   const [otherInputText, setOtherInputText] = useState('');
   const [selectedAddress, setSelectedAddress] = useState('');
   const [timeSlot, setTimeSlot] = useState<any>('');
@@ -40,17 +46,37 @@ const RaiseRequestSummaryDetail: React.FC<any> = () => {
     if (loginUserInfo && loginUserInfo.address.length > 0) {
       const defaultAddress = loginUserInfo.address[0];
       const address = defaultAddress.addressLine1 + ", " + defaultAddress.landmark + ", " + defaultAddress.city + "-" + defaultAddress.pincode + ", " + defaultAddress.state
-      setSelectedAddress(address)
+      setSelectedAddress(getAddressFormat(defaultAddress))
     }
   }, [loginUserInfo]);
 
   useEffect(() => {
+    callIssueListApi()
     if (route.params) {
       setProductItem(route.params && route.params.productItem);
       setIssueList(route.params && route.params.issueList);
       setOtherInputText(route.params && route.params.otherInputText)
     }
   }, [route.params]);
+
+  const callIssueListApi = async () => {
+    try {
+      const response = await getApiRequest(config.BASE_URL_MASTER + apiRoutes.MASTER + apiRoutes.ISSUE)
+      if (response) {
+        const otherPayload = {
+          description: "Other",
+          isChecked: false
+        }
+        const updateResponse = response.map((item: any) => {
+          return { ...item, isChecked: false };
+        });
+        updateResponse.push(otherPayload)
+        setNewIssueList(updateResponse);
+      }
+    } catch (error: any) {
+      toastMessage(error?.message);
+    }
+  };
 
   const handleOnClick = () => {
     setChooseIssue(true)
@@ -82,11 +108,11 @@ const RaiseRequestSummaryDetail: React.FC<any> = () => {
   };
 
   const getIssueList = () => {
-    const mergeIssueList = ISSUE.map(obj => issueList.find((item: any) => item.id === obj.id) || obj)
+    const mergeIssueList = newIssueList.map((obj: any) => issueList.find((item: any) => item.id === obj.id) || obj)
 
     return mergeIssueList.map((item: any) => {
-      if (otherInputText === item.title && item.isChecked === true) {
-        return { ...item, title: "Other" };
+      if (otherInputText === item.description && item.isChecked === true) {
+        return { ...item, description: "Other" };
       }
       return item;
     });
@@ -195,7 +221,7 @@ const RaiseRequestSummaryDetail: React.FC<any> = () => {
                       Product
                     </Text>
                     <Text style={[RaiseRequestStyle.productTextUnDisable]}>
-                      {productItem.product}
+                      {productItem.product?.name}
                     </Text>
                   </View>
                 </View>
@@ -210,7 +236,7 @@ const RaiseRequestSummaryDetail: React.FC<any> = () => {
                       Warranty Status
                     </Text>
                     <Text style={[RaiseRequestStyle.dopTextDisable]}>
-                      {productItem.warrantyStatus}
+                      {productItem.warrantyStatus ? 'Yes' : 'No'}
                     </Text>
                   </View>
                   <View style={appStyle.w_50}>
@@ -246,7 +272,7 @@ const RaiseRequestSummaryDetail: React.FC<any> = () => {
                   style={[
                     RaiseRequestStyle.issueText, appStyle.ml_10, appStyle.alignSelfCenter
                   ]}>
-                  {item.title}
+                  {item.description}
                 </Text>
               </View>
             </View>

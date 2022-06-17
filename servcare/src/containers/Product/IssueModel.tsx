@@ -56,8 +56,8 @@ const IssueModel: React.FC<ProductModelProps> = ({
   const handleConfirmBtn = () => {
     if (other) {
       let newIssueList = selectedIssueList.map((item: any) => {
-        if ('Other' === item.title && item.isChecked === true) {
-          return { ...item, title: other };
+        if ('Other' === item.description && item.isChecked === true) {
+          return { ...item, description: other };
         }
         return item;
       });
@@ -126,13 +126,13 @@ const IssueModel: React.FC<ProductModelProps> = ({
                     style={item.isChecked ? [MyProductStyle.modelListText, { color: Colors.GREEN_100 }] :
                       MyProductStyle.modelListText
                     }>
-                    {item.title}
+                    {item.description}
                   </Text>
                 </View>
               </TouchableOpacity>
               <View style={[MyProductStyle.ModelBorderBottom]} />
 
-              {item.title === 'Other' && item.isChecked &&
+              {item.description === 'Other' && item.isChecked &&
                 <View style={appStyle.ph_8Percent}
                 >
                   <TextInput

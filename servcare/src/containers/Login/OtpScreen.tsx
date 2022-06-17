@@ -44,14 +44,15 @@ const OtpScreen: React.FC<any> = () => {
   }, [route.params]);
 
   const handleOtpBtn = () => {
-    if (Object.keys(loginUserInfo?.userInfo).length === 0) {
-      navigation.navigate('update-profile')
-    } else {
-      navigation.dispatch(
-        StackActions.replace('bottom-tabs', { isBackStackClear: true })
-      )
-      dispatch(userLogin(true))
-    }
+    // if (Object.keys(loginUserInfo?.userInfo).length === 0) {
+    //   navigation.navigate('update-profile')
+    // } else {
+    //   navigation.dispatch(
+    //     StackActions.replace('bottom-tabs', { isBackStackClear: true })
+    //   )
+    //   dispatch(userLogin(true))
+    // }
+    navigation.navigate('update-profile')
   }
 
   return (

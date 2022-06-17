@@ -11,9 +11,10 @@ import {
   View
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useDispatch } from 'react-redux';
-import { GOOGLE_API_KEY } from '../../constants/app.constants';
-import { userInfo, userLogin } from '../../redux/actions/appAction';
+import { useDispatch, useSelector } from 'react-redux';
+import config from '../../api/config';
+import { Address, userProfileInfo } from '../../interface/interface';
+import { addAddress, incrementAddressId, userInfo, userLogin } from '../../redux/actions/appAction';
 import { appStyle } from '../../styles/app.style';
 import { splashStyle } from '../../styles/splashScreen.style';
 import { updateProfileStyle } from '../../styles/updateProfile.style';
@@ -28,16 +29,23 @@ const UpdateProfileScreen: React.FC<any> = () => {
   const navigation = useNavigation<Navigation>();
   const [referralCode, setReferralCode] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [pincode, setPincode] = useState('');
+  const [pincode, setPincode] = useState<number>();
+  const loginUserInfo = useSelector<any>(state => state.app);
 
   const handleSubmitBtn = () => {
-    const payload = {
-      name: firstName,
-      pincode: pincode,
+    const profileInfo: userProfileInfo = {
+      firstName: firstName,
       referralCode: referralCode
     }
+    const addressId = loginUserInfo?.addressId;
+    dispatch(incrementAddressId());
+    const addressInfo: Address = {
+      pincode: pincode,
+      addressId: addressId + 1
+    }
     dispatch(userLogin(true))
-    dispatch(userInfo(payload))
+    dispatch(userInfo(profileInfo))
+    dispatch(addAddress(addressInfo));
     navigation.navigate('bottom-tabs', { isBackStackClear: true });
 
   };
@@ -49,7 +57,7 @@ const UpdateProfileScreen: React.FC<any> = () => {
       ',' +
       long +
       '&key=' +
-      GOOGLE_API_KEY,
+      config.GOOGLE_API_KEY,
     );
     const data = await resp.json();
     for (let i = 0; i < data.results[0].address_components.length; i++) {

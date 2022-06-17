@@ -25,7 +25,7 @@ export const appStyle = StyleSheet.create({
   padding_15: {
     padding: 15,
   },
-  
+
   padding_20: {
     padding: 20,
   },
@@ -171,6 +171,9 @@ export const appStyle = StyleSheet.create({
   montserrat_regular: {
     fontFamily: 'Montserrat-Regular'
   },
+  montserrat_medium: {
+    fontFamily: 'Montserrat-Medium',
+  },
   text_red: {
     color: Colors.RED,
   },
@@ -223,5 +226,10 @@ export const appStyle = StyleSheet.create({
   },
   mv_10: {
     marginVertical: 10,
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
   }
 });

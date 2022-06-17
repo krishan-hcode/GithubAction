@@ -1,23 +1,9 @@
 import {
-  buyShopIcon,
-  eWasteIcon,
-  getTouchIcon,
-  installationIcon,
-  metrotoolIcon,
-  repairRequestIcon,
-  cultLiving,
-  airConditioner,
-  coffeeMachine,
-  microwaveOven,
-  refrigerator,
-  television,
-  washingMachine,
-  voltas,
-  haier,
-  daikin,
-  blue_star,
+  airConditioner, blue_star, buyShopIcon, coffeeMachine, cultLiving, daikin, eWasteIcon,
+  getTouchIcon, haier, installationIcon,
+  metrotoolIcon, microwaveOven,
+  refrigerator, repairRequestIcon, television, voltas, washingMachine
 } from '../assets/icons/';
-export const GOOGLE_API_KEY = 'AIzaSyCDkv2O6cVBz9MNchM7OsurZZ5ad_ZqRA8';
 
 //TODO:will replace to actual Data
 export const HOME_APPLIANCES = [
@@ -62,13 +48,13 @@ export const SERVICES = [
   },
   {
     id: '2',
-    title: 'Preventive Maintenance',
-    icon: metrotoolIcon,
+    title: 'Installation & Uninstallation',
+    icon: installationIcon,
   },
   {
     id: '3',
-    title: 'Installation & Uninstallation',
-    icon: installationIcon,
+    title: 'Preventive Maintenance',
+    icon: metrotoolIcon,
   },
   {
     id: '4',

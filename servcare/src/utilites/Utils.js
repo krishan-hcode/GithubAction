@@ -1,6 +1,6 @@
+import { format } from 'date-fns';
 import moment from 'moment';
 import Toast from 'react-native-simple-toast';
-import { format } from 'date-fns';
 
 export const bytesToSize = bytes => {
   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
@@ -51,8 +51,8 @@ export const isEmptyObject = (obj) => {
 export const searchData = (listData, searchText) => {
   return listData.filter(
     function (item) {
-      const itemName = item.title
-        ? item.title.toUpperCase()
+      const itemName = item.description
+        ? item.description.toUpperCase()
         : ''.toUpperCase();
       const textName = searchText.toUpperCase();
       return itemName.indexOf(textName) > -1;
@@ -61,5 +61,17 @@ export const searchData = (listData, searchText) => {
 }
 
 
+export const replaceString = (text) => {
+  const updatedString = text.split('/').join('%2F');
+  return updatedString;
+}
 
-
+export const getAddressFormat = (address) => {
+  let newAddress = ''
+  newAddress += !isEmpty(address.addressLine1) ? address.addressLine1 + ", " : ''
+  newAddress += !isEmpty(address.landmark) ? address.landmark + ", " : ''
+  newAddress += !isEmpty(address.city) ? address.city + "-" : ''
+  newAddress += !isEmpty(address.pincode) ? address.pincode + ", " : ''
+  newAddress += !isEmpty(address.state) ? address.state + ", " : ''
+  return newAddress;
+}
