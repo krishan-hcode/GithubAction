@@ -40,7 +40,7 @@ jobs:
         
       - name: Build app
         run: |       
-          xcodebuild -workspace servcare.xcworkspace -scheme servcare archive -archivePath servcare.xcarchive -allowProvisioningUpdates
+          cd ios && xcodebuild -workspace servcare.xcworkspace -scheme servcare archive -archivePath servcare.xcarchive -allowProvisioningUpdates
           xcodebuild -exportArchive -archivePath ./servcare.xcarchive -exportPath . -exportOptionsPlist servcare/Info.plist
           mv myapp.ipa ../myapp.ipa
       - name: Upload Artifact
